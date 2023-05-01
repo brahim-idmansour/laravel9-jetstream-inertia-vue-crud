@@ -60,7 +60,12 @@
 </template>
 
 <script>
+import AppLayout from "./../Layouts/AppLayout.vue";
+
 export default {
     props: ["data"],
+    components: {
+        AppLayout,
+    },
 };
 </script>
