@@ -11,6 +11,19 @@
                 <div
                     class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4"
                 >
+                    <div
+                        class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
+                        role="alert"
+                        v-if="$page.props.flash.message"
+                    >
+                        <div class="flex">
+                            <div>
+                                <p class="text-sm">
+                                    {{ $page.props.flash.message }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <button
                         @click="openForm()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"

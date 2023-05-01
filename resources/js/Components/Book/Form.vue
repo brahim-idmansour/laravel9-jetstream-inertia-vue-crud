@@ -36,6 +36,12 @@
                                     id="formBookTitle"
                                     placeholder="Enter Title"
                                 />
+                                <div
+                                    v-if="$page.props.errors.title"
+                                    class="text-red-500"
+                                >
+                                    {{ $page.props.errors.title }}
+                                </div>
                             </div>
                             <div class="mb-4">
                                 <label
@@ -50,6 +56,12 @@
                                     id="formBookAuthor"
                                     placeholder="Enter Author"
                                 />
+                                <div
+                                    v-if="$page.props.errors.author"
+                                    class="text-red-500"
+                                >
+                                    {{ $page.props.errors.author }}
+                                </div>
                             </div>
                             <div class="mb-4">
                                 <label
