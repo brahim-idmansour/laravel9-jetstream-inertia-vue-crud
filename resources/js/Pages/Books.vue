@@ -129,6 +129,7 @@ export default {
             this.isFormOpen = true;
             this.isFormEdit = !!item;
             this.formObject = item ? item : defaultFormObject;
+            this.$page.props.errors = {};
         },
         deleteItem(item) {
             // console.log(item.id);
