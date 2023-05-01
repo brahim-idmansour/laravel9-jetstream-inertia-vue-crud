@@ -12,6 +12,7 @@
                     class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4"
                 >
                     <button
+                        @click="openForm()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"
                     >
                         Create New Book
@@ -40,11 +41,13 @@
                                 <td class="px-4 py-2 border"><!-- image --></td>
                                 <td class="border px-4 py-2">
                                     <button
+                                        @click="openForm(item)"
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                     >
                                         Edit
                                     </button>
                                     <button
+                                        @click="deleteItem()"
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                     >
                                         Delete
@@ -54,6 +57,13 @@
                         </tbody>
                     </table>
                     <Pagination :links="data.links"></Pagination>
+                    <book-form
+                        :isOpen="isFormOpen"
+                        :isEdit="isFormEdit"
+                        :form="formObject"
+                        @formsave="saveItem"
+                        @formclose="closeModal"
+                    ></book-form>
                 </div>
             </div>
         </div>
@@ -61,14 +71,44 @@
 </template>
 
 <script>
+const defaultFormObject = {
+    title: null,
+    author: null,
+    image: null,
+};
 import AppLayout from "./../Layouts/AppLayout.vue";
 import Pagination from "../Components/Pagination.vue";
+import BookForm from "./../Components/Book/Form.vue";
 
 export default {
     props: ["data"],
     components: {
         AppLayout,
         Pagination,
+        BookForm,
+    },
+    data() {
+        return {
+            isFormOpen: false,
+            isFormEdit: false,
+            formObject: defaultFormObject,
+        };
+    },
+    methods: {
+        saveItem(item) {
+            console.log(item);
+        },
+        closeModal() {
+            this.isFormOpen = false;
+        },
+        openForm(item) {
+            this.isFormOpen = true;
+            this.isFormEdit = !!item;
+            this.formObject = item ? item : defaultFormObject;
+        },
+        deleteItem(item) {
+            console.log(item.id);
+        },
     },
 };
 </script>
