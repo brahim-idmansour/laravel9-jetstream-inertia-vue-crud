@@ -42,7 +42,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        Validator::make($request->all, [
+        Validator::make($request->all(), [
             'title' => 'required',
             'author' => 'required',
         ])->validate();
@@ -83,7 +83,7 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        Validator::make($request->all, [
+        Validator::make($request->all(), [
             'title' => 'required',
             'author' => 'required',
         ])->validate();

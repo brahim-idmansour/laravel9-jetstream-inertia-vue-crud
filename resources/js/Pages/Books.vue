@@ -47,7 +47,7 @@
                                         Edit
                                     </button>
                                     <button
-                                        @click="deleteItem()"
+                                        @click="deleteItem(item)"
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                     >
                                         Delete
@@ -96,7 +96,18 @@ export default {
     },
     methods: {
         saveItem(item) {
-            console.log(item);
+            // console.log(item);
+            let url = "/books";
+            if (item.id) {
+                url = "/books/" + item.id;
+                item._method = "PUT";
+            }
+            this.$inertia.post(url, item, {
+                onError: () => {},
+                onSuccess: () => {
+                    this.closeModal();
+                },
+            });
         },
         closeModal() {
             this.isFormOpen = false;
@@ -107,7 +118,12 @@ export default {
             this.formObject = item ? item : defaultFormObject;
         },
         deleteItem(item) {
-            console.log(item.id);
+            // console.log(item.id);
+            if (window.confirm("are you sure?")) {
+                this.$inertia.post("/books/" + item.id, {
+                    _method: "DELETE",
+                });
+            }
         },
     },
 };
