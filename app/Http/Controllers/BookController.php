@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Inertia\Inertia;
+use App\Models\Book;
 
 class BookController extends Controller
 {
@@ -18,7 +18,7 @@ class BookController extends Controller
     {
         $data = Book::query()->paginate(10);
 
-        Inertia::render('Books', [
+        return Inertia::render('Books', [
             'data' => $data
         ]);
     }
